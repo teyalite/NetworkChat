@@ -13,6 +13,7 @@
 #include <QWidget>
 #include <QLabel>
 #include <QVBoxLayout>
+#include <QDir>
 
 class LogoWidget : public QWidget {
 public:

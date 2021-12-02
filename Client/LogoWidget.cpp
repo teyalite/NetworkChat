@@ -3,6 +3,7 @@
 //
 
 #include "LogoWidget.h"
+#include <QDebug>
 
 /**
  * Initialise the widget that will be displayed
@@ -13,6 +14,8 @@ LogoWidget::LogoWidget(QWidget *parent) : QWidget(parent) {
     _container = new QVBoxLayout(this);
     _appLogo = new QLabel;
     _appName = new QLabel("Network Chat");
+
+    qInfo() << QDir::currentPath();
 
     /// setting app logo
     _appLogo->setStyleSheet("background-color:red;");
