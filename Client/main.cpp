@@ -1,9 +1,9 @@
 #include <QApplication>
-#include "ServerWindow.h"
+#include "ClientWindow.h"
 
 int main(int argc, char *argv[]) {
     QApplication a(argc, argv);
-    ServerWindow server;
-    server.show();
+    ClientWindow window;
+    window.show();
     return QApplication::exec();
 }

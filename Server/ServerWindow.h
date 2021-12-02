@@ -1,24 +1,41 @@
-#ifndef SERVERWINDOW_H
-#define SERVERWINDOW_H
+//
+// Created by Abdoulkader Haidara on 29.11.2021.
+//
 
-#include <QtWidgets>
-#include <QtNetwork>
+#ifndef NETWORKCHAT_SERVERWINDOW_H
+#define NETWORKCHAT_SERVERWINDOW_H
 
-class ServerWindow: public QWidget {
-    Q_OBJECT
+#include <QWidget>
+#include <QObject>
+#include <QApplication>
+#include <QtNetwork/QTcpServer>
+#include <QtNetwork/QTcpSocket>
+#include <QList>
+#include <QPushButton>
+#include <QLabel>
+#include <QVBoxLayout>
+#include <QtNetwork/QHostAddress>
+#include <QString>
+#include <QDebug>
+
+class ServerWindow : public QWidget
+{
+Q_OBJECT
 public:
     ServerWindow();
-    void SendToAll(const QString& message);
-private slots:
-    void ClientConnect();
-    void ClientDisconnect();
-    void ReceivedData();
+    void sendToAll(const QString &message);
+
+public slots:
+    void newClient();
+    void receivedData();
+    void disconnectClient();
+
 private:
-    QLabel* serverState;
-    QPushButton* closeButton;
-    QTcpServer* server;
-    QList<QTcpSocket*> clients;
-    quint16 messageSize;
+    QLabel* _serverState;
+    QPushButton* _quitButton;
+    QTcpServer* _server;
+    QList<QTcpSocket*> _clients;
+    quint16 _messageSize;
 };
 
-#endif // SERVERWINDOW_H
+#endif //NETWORKCHAT_SERVERWINDOW_H
