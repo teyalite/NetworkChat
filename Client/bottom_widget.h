@@ -2,8 +2,8 @@
 // Created by Abdoulkader Haidara on 01.12.2021.
 //
 
-#ifndef CLIENT_BOTTOMWIDGET_H
-#define CLIENT_BOTTOMWIDGET_H
+#ifndef CLIENT_BOTTOM_WIDGET_H
+#define CLIENT_BOTTOM_WIDGET_H
 
 /**
  * This class represent the bottom widget that manage the message and username
@@ -22,17 +22,21 @@ class BottomWidget : public QWidget {
 Q_OBJECT
 public:
     explicit BottomWidget(QWidget* parent = nullptr);
-    void setConnected(bool value);
+    void SetConnected(bool value);
+    /// The following methods will be used during testing
+    QLineEdit* GetUsername();
+    QPushButton* GetSendButton();
+    QLineEdit* GetMessage();
 
 private slots:
-    void onSendButtonClicked();
-    void onSubmitMessage();
+    void OnSendButtonClicked();
+    void OnSubmitMessage();
 
 signals:
-    void onSendMessage(const QString& message);
+    void OnSendMessage(const QString& message);
 
 private:
-    void showAlert(const QString& message);
+    void ShowAlert(const QString& message);
 
     QHBoxLayout* _mainLayout;
     QPushButton* _sendButton;
@@ -43,4 +47,4 @@ private:
     bool _isConnected = false;
 };
 
-#endif //CLIENT_BOTTOMWIDGET_H
+#endif //CLIENT_BOTTOM_WIDGET_H

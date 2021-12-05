@@ -2,8 +2,8 @@
 // Created by Abdoulkader Haidara on 02.12.2021.
 //
 
-#ifndef CLIENT_LISTWIDGET_H
-#define CLIENT_LISTWIDGET_H
+#ifndef CLIENT_LIST_WIDGET_H
+#define CLIENT_LIST_WIDGET_H
 
 /**
  * This class represents the list that will contain the chat messages
@@ -18,7 +18,7 @@ class ListWidget : public QWidget {
     Q_OBJECT
 public:
     explicit ListWidget(QWidget* parent = nullptr);
-    void addItem(const QString& message);
+    void AddItem(const QString& message);
 
 private:
     QVBoxLayout* _main;
@@ -26,4 +26,4 @@ private:
     QLabel* _emptyListLabel;
 };
 
-#endif //CLIENT_LISTWIDGET_H
+#endif //CLIENT_LIST_WIDGET_H

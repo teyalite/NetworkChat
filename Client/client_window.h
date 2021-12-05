@@ -2,8 +2,8 @@
 // Created by Abdoulkader Haidara on 30.11.2021.
 //
 
-#ifndef CLIENT_CLIENTWINDOW_H
-#define CLIENT_CLIENTWINDOW_H
+#ifndef CLIENT_CLIENT_WINDOW_H
+#define CLIENT_CLIENT_WINDOW_H
 
 /**
  * Main client window it displays all necessary widgets for the app
@@ -12,9 +12,9 @@
 #include <QWidget>
 #include <QVBoxLayout>
 #include <QtNetwork/QTcpSocket>
-#include "BottomWidget.h"
-#include "TopWidget.h"
-#include "ListWidget.h"
+#include "bottom_widget.h"
+#include "top_widget.h"
+#include "list_widget.h"
 
 class ClientWindow : public QWidget {
     Q_OBJECT
@@ -22,15 +22,15 @@ public:
     ClientWindow();
 
 private slots:
-    void onConnect(const QString& ip, const int& port);
-    void onSendMessage(const QString& message);
-    void onConnected();
-    void receivedData();
-    void onDisconnect();
-    void onSocketError(QAbstractSocket::SocketError error);
+    void OnConnect(const QString& ip, const int& port);
+    void OnSendMessage(const QString& message);
+    void OnConnected();
+    void OnReceivedData();
+    void OnDisconnect();
+    void OnSocketError(QAbstractSocket::SocketError error);
 
 private:
-    void setupSocket();
+    void SetupSocket();
 
     quint16 _messageSize {};
     QTcpSocket* _socket {};
@@ -40,4 +40,4 @@ private:
     ListWidget* _list;
 };
 
-#endif //CLIENT_CLIENTWINDOW_H
+#endif //CLIENT_CLIENT_WINDOW_H

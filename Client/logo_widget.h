@@ -2,11 +2,11 @@
 // Created by Abdoulkader Haidara on 01.12.2021.
 //
 
-#ifndef CLIENT_LOGOWIDGET_H
-#define CLIENT_LOGOWIDGET_H
+#ifndef CLIENT_LOGO_WIDGET_H
+#define CLIENT_LOGO_WIDGET_H
 
 /**
- * The class defined here represents the app logo and logo text
+ * The class defined here represents the app name and logo but i was having error with image in qt
  */
 
 #include <QApplication>
@@ -18,10 +18,12 @@
 class LogoWidget : public QWidget {
 public:
     explicit LogoWidget(QWidget *parent = nullptr);
+
 private:
+    QString GetPath(QStringList list);
+
     QVBoxLayout* _container;
     QLabel* _appName;
-    QLabel* _appLogo;
 };
 
-#endif //CLIENT_LOGOWIDGET_H
+#endif //CLIENT_LOGO_WIDGET_H

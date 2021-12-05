@@ -2,7 +2,7 @@
 // Created by Abdoulkader Haidara on 01.12.2021.
 //
 
-#include "TopWidget.h"
+#include "top_widget.h"
 
 /**
  * The constructor set the widgets and related values
@@ -47,26 +47,26 @@ TopWidget::TopWidget(QWidget *parent) : QWidget(parent){
     setLayout(_mainLayout);
 
     /// connect connect button with the handler
-    QWidget::connect(_connectionButton, SIGNAL(clicked()), this, SLOT(onConnectionButtonClicked()));
+    QWidget::connect(_connectionButton, SIGNAL(clicked()), this, SLOT(OnConnectionButtonClicked()));
 }
 
 /**
  * connect button handler
  */
-void TopWidget::onConnectionButtonClicked() {
+void TopWidget::OnConnectionButtonClicked() {
     /// check if the ip address field is empty
     if (_serverIP->text().isEmpty()) {
-        showAlert("Server IP address is required to connect");
+        ShowAlert("Server IP address is required to connect");
         return;
     }
 
     /// check if the port field is empty
     if (_serverPort->text().isEmpty()) {
-        showAlert("Server Port is required to connect");
+        ShowAlert("Server Port is required to connect");
         return;
     }
 
-    emit onConnect(_serverIP->text(), _serverPort->value());
+    emit OnConnect(_serverIP->text(), _serverPort->value());
     /// disable button
     _connectionButton->setEnabled(false);
 }
@@ -75,13 +75,37 @@ void TopWidget::onConnectionButtonClicked() {
  * Alert dialog to display when can't fire sendMessage signal
  * @param message
  */
-void TopWidget::showAlert(const QString& message) {
+void TopWidget::ShowAlert(const QString& message) {
     QMessageBox::critical(this, "Window title", message);
 }
 
 /**
  * Enable connect button after connected or failed to connect
  */
-void TopWidget::enableConnectButton() {
+void TopWidget::EnableConnectButton() {
     _connectionButton->setEnabled(true);
+}
+
+/**
+ * Get the pointer to the QLineEdit
+ * @return
+ */
+QLineEdit *TopWidget::GetServerIP() {
+    return _serverIP;
+}
+
+/**
+ * Get the pointer to the QSpinBox
+ * @return
+ */
+QSpinBox *TopWidget::GetServerPort() {
+    return _serverPort;
+}
+
+/**
+ * Get the pointer to the QPushButton
+ * @return
+ */
+QPushButton *TopWidget::GetConnectionButton() {
+    return _connectionButton;
 }

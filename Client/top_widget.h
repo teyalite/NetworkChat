@@ -2,8 +2,8 @@
 // Created by Abdoulkader Haidara on 01.12.2021.
 //
 
-#ifndef CLIENT_TOPWIDGET_H
-#define CLIENT_TOPWIDGET_H
+#ifndef CLIENT_TOP_WIDGET_H
+#define CLIENT_TOP_WIDGET_H
 
 /**
  * The class defined here is the top widget of the app
@@ -20,22 +20,26 @@
 #include <QLabel>
 #include <QLineEdit>
 #include <QHBoxLayout>
-#include "LogoWidget.h"
+#include "logo_widget.h"
 
 class TopWidget : public QWidget {
 Q_OBJECT
 public:
     explicit TopWidget(QWidget* parent = nullptr);
-    void enableConnectButton();
+    void EnableConnectButton();
+    /// the following methods will be used during tests
+    QLineEdit* GetServerIP();
+    QSpinBox* GetServerPort();
+    QPushButton* GetConnectionButton();
 
 private slots:
-    void onConnectionButtonClicked();
+    void OnConnectionButtonClicked();
 
 signals:
-    void onConnect(const QString& ip, const int& port);
+    void OnConnect(const QString& ip, const int& port);
 
 private:
-    void showAlert(const QString& message);
+    void ShowAlert(const QString& message);
 
     QHBoxLayout* _mainLayout;
     QLineEdit* _serverIP;
@@ -46,4 +50,4 @@ private:
     LogoWidget* _logo;
 };
 
-#endif //CLIENT_TOPWIDGET_H
+#endif //CLIENT_TOP_WIDGET_H

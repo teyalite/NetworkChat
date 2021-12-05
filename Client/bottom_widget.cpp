@@ -2,7 +2,8 @@
 // Created by Abdoulkader Haidara on 01.12.2021.
 //
 
-#include "BottomWidget.h"
+#include "bottom_widget.h"
+#include <QDebug>
 
 /**
  * Unique constructor for the class and set widgets settings
@@ -37,17 +38,17 @@ BottomWidget::BottomWidget(QWidget *parent) : QWidget(parent) {
     setLayout(_mainLayout);
 
     /// connect widget signals to slots
-    QWidget::connect(_sendButton, SIGNAL(clicked()), this, SLOT(onSendButtonClicked()));
-    QWidget::connect(_message, SIGNAL(returnPressed()), this, SLOT(onSubmitMessage()));
+    QWidget::connect(_sendButton, SIGNAL(clicked()), this, SLOT(OnSendButtonClicked()));
+    QWidget::connect(_message, SIGNAL(returnPressed()), this, SLOT(OnSubmitMessage()));
 }
 
 /**
  * this slot is called when user click on send message button
  */
-void BottomWidget::onSendButtonClicked() {
+void BottomWidget::OnSendButtonClicked() {
     //// check if username is empty
     if (_username->text().isEmpty()) {
-        showAlert("User name empty");
+        ShowAlert("User name empty");
         return;
     }
 
@@ -57,12 +58,12 @@ void BottomWidget::onSendButtonClicked() {
 
     /// if the user is not connected
     if (!_isConnected) {
-        showAlert("You are not connected, connect to a server to start chatting");
+        ShowAlert("You are not connected, connect to a server to start chatting");
         return;
     }
 
     /// emit the signal sendMessage with the user name and message content
-    emit onSendMessage("from " + _username->text() + " : " + _message->text());
+    emit OnSendMessage("from " + _username->text() + " : " + _message->text());
 
     /// clear message input content and set focus
     _message->clear();
@@ -72,15 +73,15 @@ void BottomWidget::onSendButtonClicked() {
 /**
  * this slot is called when enter button is clicked while typing inside the message area
  */
-void BottomWidget::onSubmitMessage() {
-    onSendButtonClicked();
+void BottomWidget::OnSubmitMessage() {
+    OnSendButtonClicked();
 }
 
 /**
  * Alert dialog to display when can't fire sendMessage signal
  * @param message
  */
-void BottomWidget::showAlert(const QString& message) {
+void BottomWidget::ShowAlert(const QString& message) {
     QMessageBox::critical(this, "Window title", message);
 }
 
@@ -88,6 +89,30 @@ void BottomWidget::showAlert(const QString& message) {
  * set the connected state to if user is connected or not
  * @param value
  */
-void BottomWidget::setConnected(bool value) {
+void BottomWidget::SetConnected(bool value) {
     _isConnected = value;
+}
+
+/**
+ * Used in testing to get pointer to the QLineEdit
+ * @return
+ */
+QLineEdit *BottomWidget::GetUsername() {
+    return _username;
+}
+
+/**
+ * Used in testing to get pointer to the QPushButton
+ * @return
+ */
+QPushButton *BottomWidget::GetSendButton() {
+    return _sendButton;
+}
+
+/**
+ * Used in testing to get pointer to the QLineEdit
+ * @return
+ */
+QLineEdit *BottomWidget::GetMessage() {
+    return _message;
 }

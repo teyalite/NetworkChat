@@ -2,7 +2,7 @@
 // Created by Abdoulkader Haidara on 02.12.2021.
 //
 
-#include "ListWidget.h"
+#include "list_widget.h"
 /**
  * Initialise the widget and set values
  * @param parent
@@ -31,7 +31,7 @@ ListWidget::ListWidget(QWidget* parent) : QWidget(parent){
  * called to add new item to the list
  * @param message
  */
-void ListWidget::addItem(const QString& message) {
+void ListWidget::AddItem(const QString& message) {
 
     /// if the list is hidden, show it
     if (_messageList->isHidden())

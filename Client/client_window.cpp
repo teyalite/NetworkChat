@@ -2,7 +2,7 @@
 // Created by Abdoulkader Haidara on 30.11.2021.
 //
 
-#include "ClientWindow.h"
+#include "client_window.h"
 
 /**
  * Unique constructor for the class it initialises widgets, layout and the socket
@@ -19,12 +19,12 @@ ClientWindow::ClientWindow() : QWidget() {
     _list = new ListWidget(this);
 
     /// prepare the socket
-    setupSocket();
+    SetupSocket();
 
     /// connect send
-    QWidget::connect(_bottomWidget, SIGNAL(onSendMessage(QString)), this, SLOT(onSendMessage(QString)));
-    /// connecting the onConnect signal to onConncet of the current class
-    QWidget::connect(_topWidget, SIGNAL(onConnect(QString, int)), this, SLOT(onConnect(QString, int)));
+    QWidget::connect(_bottomWidget, SIGNAL(OnSendMessage(QString)), this, SLOT(OnSendMessage(QString)));
+    /// connecting the onConnect signal to onConnect of the current class
+    QWidget::connect(_topWidget, SIGNAL(OnConnect(QString, int)), this, SLOT(OnConnect(QString, int)));
 
     /// add widget to main layout
     _mainLayout->addWidget(_topWidget);
@@ -39,7 +39,7 @@ ClientWindow::ClientWindow() : QWidget() {
  * Slot to call when onSendMessage of bottom message happens
  * @param message
  */
-void ClientWindow::onSendMessage(const QString& message) {
+void ClientWindow::OnSendMessage(const QString& message) {
 
     QByteArray packet;
     QDataStream out(&packet, QIODevice::WriteOnly);
@@ -58,8 +58,8 @@ void ClientWindow::onSendMessage(const QString& message) {
  * @param ip
  * @param port
  */
-void ClientWindow::onConnect(const QString &ip, const int &port) {
-    _list->addItem("Trying to connect to the server....");
+void ClientWindow::OnConnect(const QString &ip, const int &port) {
+    _list->AddItem("Trying to connect to the server....");
     _socket->abort();
     _socket->connectToHost(ip, port);
 }
@@ -67,17 +67,17 @@ void ClientWindow::onConnect(const QString &ip, const int &port) {
 /**
  * When the socket successfully connected to server
  */
-void ClientWindow::onConnected() {
-    _list->addItem("Connected successfully !");
-    _bottomWidget->setConnected(true);
-    _topWidget->enableConnectButton();
+void ClientWindow::OnConnected() {
+    _list->AddItem("Connected successfully !");
+    _bottomWidget->SetConnected(true);
+    _topWidget->EnableConnectButton();
 }
 
 /**
  * When error happens with the socket
  * @param error
  */
-void ClientWindow::onSocketError(QAbstractSocket::SocketError error) {
+void ClientWindow::OnSocketError(QAbstractSocket::SocketError error) {
 
     QString errorMessage;
 
@@ -98,15 +98,15 @@ void ClientWindow::onSocketError(QAbstractSocket::SocketError error) {
             errorMessage = "Error ! " + _socket->errorString();
     }
 
-    _bottomWidget->setConnected(false);
-    _list->addItem(errorMessage);
-    _topWidget->enableConnectButton();
+    _bottomWidget->SetConnected(false);
+    _list->AddItem(errorMessage);
+    _topWidget->EnableConnectButton();
 }
 
 /**
  * Receive data from the server
  */
-void ClientWindow::receivedData() {
+void ClientWindow::OnReceivedData() {
 
     QDataStream in(_socket);
 
@@ -125,7 +125,7 @@ void ClientWindow::receivedData() {
 
     in >> message;
 
-    _list->addItem(message);
+    _list->AddItem(message);
 
     _messageSize = 0;
 }
@@ -133,21 +133,21 @@ void ClientWindow::receivedData() {
 /**
  * When the user disconnect from the server
  */
-void ClientWindow::onDisconnect() {
-    _list->addItem("Disconnected from the server");
+void ClientWindow::OnDisconnect() {
+    _list->AddItem("Disconnected from the server");
 }
 
 /**
  * Setup the socket with signals and slots
  */
-void ClientWindow::setupSocket() {
+void ClientWindow::SetupSocket() {
 
     _socket = new QTcpSocket(this);
 
-    connect(_socket, SIGNAL(readyRead()), this, SLOT(receivedData()));
-    connect(_socket, SIGNAL(connected()), this, SLOT(onConnected()));
-    connect(_socket, SIGNAL(disconnected()), this, SLOT(onDisconnect()));
-    connect(_socket, SIGNAL(errorOccurred(QAbstractSocket::SocketError)), this, SLOT(onSocketError(QAbstractSocket::SocketError)));
+    QWidget::connect(_socket, SIGNAL(readyRead()), this, SLOT(OnReceivedData()));
+    QWidget::connect(_socket, SIGNAL(connected()), this, SLOT(OnConnected()));
+    QWidget::connect(_socket, SIGNAL(disconnected()), this, SLOT(OnDisconnect()));
+    QWidget::connect(_socket, SIGNAL(errorOccurred(QAbstractSocket::SocketError)), this, SLOT(OnSocketError(QAbstractSocket::SocketError)));
 
     _messageSize = 0;
 }
