@@ -6,7 +6,7 @@ The project will be based on the model Client/Server.
 ## How Chat works:
 For now, i will keep some functionalities simple, i may make them more complex in the future.
 A client send a message to the server.
-The server distribute the message to all connected clients and it will be shown on their windows.
+The server distribute the message to all connected clients and it will be shown on their windows.<br />
 [Here are some screenshots of the applications](https://github.com/teyalite/NetworkChat/tree/main/ScreenShots).
 
 ## Tests
