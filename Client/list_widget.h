@@ -19,6 +19,8 @@ class ListWidget : public QWidget {
 public:
     explicit ListWidget(QWidget* parent = nullptr);
     void AddItem(const QString& message);
+    /// the following method will be used during tests
+    QListWidget* GetMessageList();
 
 private:
     QVBoxLayout* _main;

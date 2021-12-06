@@ -7,15 +7,26 @@
 #include <QSignalSpy>
 #include "../bottom_widget.h"
 #include "../top_widget.h"
+#include "../list_widget.h"
 
 class Test: public QObject
 {
 Q_OBJECT
 private slots:
-    static void BottomTest();
     static void TopTest();
+    static void ListTest();
+    static void BottomTest();
 };
 
+void Test::ListTest() {
+    ListWidget listWidget;
+    listWidget.AddItem("Hello world !");
+    QCOMPARE(listWidget.GetMessageList()->count(), 1);
+}
+
+/**
+ * Test the top widget server and port and related signals and slots
+ */
 void Test::TopTest() {
     TopWidget topWidget;
     QSignalSpy spy(&topWidget, SIGNAL(OnConnect(QString, int)));

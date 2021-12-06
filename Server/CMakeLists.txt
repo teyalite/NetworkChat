@@ -14,7 +14,7 @@ find_package(Qt6 COMPONENTS
         Widgets
         REQUIRED)
 
-add_executable(Server main.cpp ServerWindow.cpp ServerWindow.h)
+add_executable(Server main.cpp server_window.cpp server_window.h)
 target_link_libraries(Server
         Qt::Core
         Qt::Gui

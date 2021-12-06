@@ -45,3 +45,7 @@ void ListWidget::AddItem(const QString& message) {
     _messageList->addItem(message);
     _messageList->scrollToBottom();
 }
+
+QListWidget* ListWidget::GetMessageList() {
+    return _messageList;
+}

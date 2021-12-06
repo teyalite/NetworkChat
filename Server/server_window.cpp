@@ -2,7 +2,7 @@
 // Created by Abdoulkader Haidara on 29.11.2021.
 //
 
-#include "ServerWindow.h"
+#include "server_window.h"
 
 ServerWindow::ServerWindow() : QWidget()
 {
@@ -34,17 +34,17 @@ ServerWindow::ServerWindow() : QWidget()
                               + tr("</strong>.<br/>Clients can connect now."));
 
         /// connect new connection of server to new client slot
-        QWidget::connect(_server, SIGNAL(newConnection()), this, SLOT(newClient()));
+        QWidget::connect(_server, SIGNAL(newConnection()), this, SLOT(NewClient()));
     }
 
     /// initialize message size to 0
     _messageSize = 0;
 }
 
-void ServerWindow::newClient() {
+void ServerWindow::NewClient() {
 
     /// send a message to all cliens
-    sendToAll("A new client has got connected");
+    SendToAll("A new client has got connected");
 
     QTcpSocket *new_client = _server->nextPendingConnection();
 
@@ -52,12 +52,15 @@ void ServerWindow::newClient() {
     _clients << new_client;
 
     /// connect new client ready to read to received data slot
-    QWidget::connect(new_client, SIGNAL(readyRead()), this, SLOT(receivedData()));
+    QWidget::connect(new_client, SIGNAL(readyRead()), this, SLOT(onReceivedData()));
     /// connect new client disconnection to disconnect client slot
-    QWidget::connect(new_client, SIGNAL(disconnected()), this, SLOT(disconnectClient()));
+    QWidget::connect(new_client, SIGNAL(disconnected()), this, SLOT(onDisconnectClient()));
 }
 
-void ServerWindow::receivedData() {
+/**
+ * When server received data from a client
+ */
+void ServerWindow::onReceivedData() {
     auto* socket = qobject_cast<QTcpSocket*>(sender());
 
     if (socket == nullptr)
@@ -80,7 +83,7 @@ void ServerWindow::receivedData() {
 
     in >> message;
 
-    sendToAll(message);
+    SendToAll(message);
 
     _messageSize = 0;
 }
@@ -89,7 +92,7 @@ void ServerWindow::receivedData() {
  * Send message to all client that are connected
  * @param message
  */
-void ServerWindow::sendToAll(const QString &message) {
+void ServerWindow::SendToAll(const QString &message) {
 
     QByteArray frame;
     QDataStream out(&frame, QIODevice::WriteOnly);
@@ -103,8 +106,11 @@ void ServerWindow::sendToAll(const QString &message) {
 
 }
 
-void ServerWindow::disconnectClient() {
-    sendToAll("notification: A client got disconnected");
+/**
+ * When a client got disconnected
+ */
+void ServerWindow::onDisconnectClient() {
+    SendToAll("A client got disconnected");
 
     auto *socket = qobject_cast<QTcpSocket *>(sender());
 

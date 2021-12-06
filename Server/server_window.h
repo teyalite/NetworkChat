@@ -23,12 +23,12 @@ class ServerWindow : public QWidget
 Q_OBJECT
 public:
     ServerWindow();
-    void sendToAll(const QString &message);
+    void SendToAll(const QString &message);
 
 public slots:
-    void newClient();
-    void receivedData();
-    void disconnectClient();
+    void NewClient();
+    void onReceivedData();
+    void onDisconnectClient();
 
 private:
     QLabel* _serverState;
