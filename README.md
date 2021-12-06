@@ -7,3 +7,12 @@ The project will be based on the model Client/Server.
 For now, i will keep some functionalities simple, i may make them more complex in the future.
 A client send a message to the server.
 The server distribute the message to all connected clients and it will be shown on their windows.
+
+## Tests
+To run test run the command:
+```
+cd Client/tests
+```
+After that follow the qt tutorial on executing tests [here](https://doc.qt.io/qt-5/qttestlib-tutorial1-example.html).
+After running tests successfully it should show something similar to:
+![tests](https://github.com/teyalite/NetworkChat/blob/main/ScreenShots/running%20tests.png)
