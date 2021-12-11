@@ -2,7 +2,7 @@
 // Created by Abdoulkader Haidara on 29.11.2021.
 //
 
-#include "server_window.h"
+#include "../headers/server_window.h"
 
 ServerWindow::ServerWindow() : QWidget()
 {
