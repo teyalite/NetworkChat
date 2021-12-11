@@ -2,7 +2,7 @@
 // Created by Abdoulkader Haidara on 30.11.2021.
 //
 
-#include "client_window.h"
+#include "../headers/client_window.h"
 
 /**
  * Unique constructor for the class it initialises widgets, layout and the socket

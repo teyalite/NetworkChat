@@ -2,7 +2,7 @@
 // Created by Abdoulkader Haidara on 02.12.2021.
 //
 
-#include "list_widget.h"
+#include "../headers/list_widget.h"
 /**
  * Initialise the widget and set values
  * @param parent

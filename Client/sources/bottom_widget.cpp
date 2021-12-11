@@ -2,8 +2,7 @@
 // Created by Abdoulkader Haidara on 01.12.2021.
 //
 
-#include "bottom_widget.h"
-#include <QDebug>
+#include "../headers/bottom_widget.h"
 
 /**
  * Unique constructor for the class and set widgets settings
@@ -11,13 +10,33 @@
  */
 BottomWidget::BottomWidget(QWidget *parent) : QWidget(parent) {
 
+    InitialiseWidgets();
+
+    QList<QWidget*> widgets = {_usernameLabel, _username, _messageLabel, _message, _sendButton};
+
+    /// add widgets to layout
+    for(auto& widget : widgets)
+        _mainLayout->addWidget(widget);
+
+    /// set the class layout
+    setLayout(_mainLayout);
+
+    /// connect widget signals to slots
+    QWidget::connect(_sendButton, SIGNAL(clicked()), this, SLOT(OnSendButtonClicked()));
+    QWidget::connect(_message, SIGNAL(returnPressed()), this, SLOT(OnSubmitMessage()));
+}
+
+/**
+ * Initialise widgets and layout
+ */
+void BottomWidget::InitialiseWidgets() {
     /// initialisation of layout and widgets
     _mainLayout = new QHBoxLayout;
-    _sendButton = new QPushButton("Send message");
-    _username = new QLineEdit;
     _usernameLabel = new QLabel("Username :");
-    _message = new QLineEdit;
+    _username = new QLineEdit;
     _messageLabel = new QLabel("Message :");
+    _message = new QLineEdit;
+    _sendButton = new QPushButton("Send message");
 
     /// defining style properties for widgets
     _sendButton->setContentsMargins(10, 10, 10, 40);
@@ -26,20 +45,6 @@ BottomWidget::BottomWidget(QWidget *parent) : QWidget(parent) {
     _message->setMinimumSize(100, 30);
     _message->setFocus();
     _messageLabel->setContentsMargins(20, 0, 10, 0);
-
-    /// add widgets to layout
-    _mainLayout->addWidget(_usernameLabel);
-    _mainLayout->addWidget(_username);
-    _mainLayout->addWidget(_messageLabel);
-    _mainLayout->addWidget(_message);
-    _mainLayout->addWidget(_sendButton);
-
-    /// set the class layout
-    setLayout(_mainLayout);
-
-    /// connect widget signals to slots
-    QWidget::connect(_sendButton, SIGNAL(clicked()), this, SLOT(OnSendButtonClicked()));
-    QWidget::connect(_message, SIGNAL(returnPressed()), this, SLOT(OnSubmitMessage()));
 }
 
 /**

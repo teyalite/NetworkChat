@@ -40,14 +40,15 @@ signals:
 
 private:
     void ShowAlert(const QString& message);
+    void InitialiseWidgets();
 
-    QHBoxLayout* _mainLayout;
-    QLineEdit* _serverIP;
-    QLabel* _serverLabel;
-    QSpinBox* _serverPort;
-    QLabel* _serverPortLabel;
-    QPushButton* _connectionButton;
-    LogoWidget* _logo;
+    QHBoxLayout* _mainLayout{};
+    QLineEdit* _serverIP{};
+    QLabel* _serverLabel{};
+    QSpinBox* _serverPort{};
+    QLabel* _serverPortLabel{};
+    QPushButton* _connectionButton{};
+    LogoWidget* _logo{};
 };
 
 #endif //CLIENT_TOP_WIDGET_H

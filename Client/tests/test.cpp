@@ -5,9 +5,9 @@
 #include <QtTest/QtTest>
 #include <QDebug>
 #include <QSignalSpy>
-#include "../bottom_widget.h"
-#include "../top_widget.h"
-#include "../list_widget.h"
+#include "../headers/bottom_widget.h"
+#include "../headers/top_widget.h"
+#include "../headers/list_widget.h"
 
 class Test: public QObject
 {

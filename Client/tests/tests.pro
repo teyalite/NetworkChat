@@ -15,5 +15,5 @@ CONFIG+=sdk_no_version_check
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 # Input
-SOURCES += test.cpp ../bottom_widget.cpp ../top_widget.cpp ../logo_widget.cpp ../list_widget.cpp
-HEADERS += ../bottom_widget.h ../top_widget.h ../logo_widget.h ../list_widget.h
+SOURCES += test.cpp ../sources/bottom_widget.cpp ../sources/top_widget.cpp ../sources/logo_widget.cpp ../sources/list_widget.cpp
+HEADERS += ../headers/bottom_widget.h ../headers/top_widget.h ../headers/logo_widget.h ../headers/list_widget.h

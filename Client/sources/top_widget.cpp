@@ -2,7 +2,7 @@
 // Created by Abdoulkader Haidara on 01.12.2021.
 //
 
-#include "top_widget.h"
+#include "../headers/top_widget.h"
 
 /**
  * The constructor set the widgets and related values
@@ -11,6 +11,27 @@
  */
 TopWidget::TopWidget(QWidget *parent) : QWidget(parent){
 
+    InitialiseWidgets();
+
+    QList<QWidget*> widgets = {_serverLabel, _serverIP, _serverPortLabel, _serverPort, _connectionButton, nullptr, _logo};
+
+    /// add widgets to layout
+    for(auto& widget : widgets) {
+        if (widget != nullptr) {
+            _mainLayout->addWidget(widget);
+        } else {
+            _mainLayout->addStretch();
+        }
+    }
+
+    /// set class layout
+    setLayout(_mainLayout);
+
+    /// connect connect button with the handler
+    QWidget::connect(_connectionButton, SIGNAL(clicked()), this, SLOT(OnConnectionButtonClicked()));
+}
+
+void TopWidget::InitialiseWidgets() {
     /// initialisation of layout and widgets
     _mainLayout = new QHBoxLayout;
     _serverIP = new QLineEdit;
@@ -33,21 +54,6 @@ TopWidget::TopWidget(QWidget *parent) : QWidget(parent){
     _serverPort->setValue(50885);
     _serverPort->setMaximumWidth(80);
     _serverPort->setMinimumWidth(80);
-
-    /// add widgets to layout
-    _mainLayout->addWidget(_serverLabel);
-    _mainLayout->addWidget(_serverIP);
-    _mainLayout->addWidget(_serverPortLabel);
-    _mainLayout->addWidget(_serverPort);
-    _mainLayout->addWidget(_connectionButton);
-    _mainLayout->addStretch();
-    _mainLayout->addWidget(_logo);
-
-    /// set class layout
-    setLayout(_mainLayout);
-
-    /// connect connect button with the handler
-    QWidget::connect(_connectionButton, SIGNAL(clicked()), this, SLOT(OnConnectionButtonClicked()));
 }
 
 /**

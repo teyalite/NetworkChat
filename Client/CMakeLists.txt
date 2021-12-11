@@ -14,7 +14,7 @@ find_package(Qt6 COMPONENTS
         Widgets
         REQUIRED)
 
-add_executable(Client main.cpp client_window.cpp client_window.h top_widget.cpp top_widget.h bottom_widget.cpp bottom_widget.h logo_widget.cpp logo_widget.h list_widget.cpp list_widget.h)
+add_executable(Client sources/main.cpp sources/client_window.cpp headers/client_window.h sources/top_widget.cpp headers/top_widget.h sources/bottom_widget.cpp headers/bottom_widget.h sources/logo_widget.cpp headers/logo_widget.h sources/list_widget.cpp headers/list_widget.h)
 target_link_libraries(Client
         Qt::Core
         Qt::Gui

@@ -2,7 +2,7 @@
 // Created by Abdoulkader Haidara on 01.12.2021.
 //
 
-#include "logo_widget.h"
+#include "../headers/logo_widget.h"
 #include <QDebug>
 
 /**

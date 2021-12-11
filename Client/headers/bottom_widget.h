@@ -17,6 +17,7 @@
 #include <QLineEdit>
 #include <QHBoxLayout>
 #include <QtNetwork/QTcpSocket>
+#include <QList>
 
 class BottomWidget : public QWidget {
 Q_OBJECT
@@ -37,13 +38,14 @@ signals:
 
 private:
     void ShowAlert(const QString& message);
+    void InitialiseWidgets();
 
-    QHBoxLayout* _mainLayout;
-    QPushButton* _sendButton;
-    QLineEdit* _username;
-    QLabel* _usernameLabel;
-    QLineEdit* _message;
-    QLabel* _messageLabel;
+    QHBoxLayout* _mainLayout{};
+    QPushButton* _sendButton{};
+    QLineEdit* _username{};
+    QLabel* _usernameLabel{};
+    QLineEdit* _message{};
+    QLabel* _messageLabel{};
     bool _isConnected = false;
 };
 
